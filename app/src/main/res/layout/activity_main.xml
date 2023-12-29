@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navigator"
@@ -19,26 +19,27 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/baseline_collections_bookmark_24"
-            app:layout_constraintBottom_toBottomOf="@+id/read"
-            app:layout_constraintEnd_toStartOf="@+id/read"
+            app:layout_constraintBottom_toBottomOf="@+id/read_page1"
+            app:layout_constraintEnd_toStartOf="@+id/read_page1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/read" />
+            app:layout_constraintTop_toTopOf="@+id/read_page1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/advice_tv"
             android:text="推荐"
-            android:textSize="10sp"
+            android:textSize="13sp"
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="@+id/advice_page"
             app:layout_constraintStart_toStartOf="@+id/advice_page"
             app:layout_constraintTop_toTopOf="@+id/practice_tv" />
 
         <ImageView
-            android:id="@+id/read"
+            android:id="@+id/read_page1"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/baseline_contactless_24"
+            android:background="@drawable/baseline_contactless_24_grey"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,35 +53,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="练习"
-            android:textSize="10sp"
-            android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/read"
-            app:layout_constraintStart_toStartOf="@+id/read"
-            app:layout_constraintTop_toBottomOf="@+id/read" />
+            android:textSize="13sp"
+            android:textColor="#cccccc"
+            app:layout_constraintEnd_toEndOf="@+id/read_page1"
+            app:layout_constraintStart_toStartOf="@+id/read_page1"
+            app:layout_constraintTop_toBottomOf="@+id/read_page1" />
 
         <ImageView
             android:id="@+id/main_page"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/baseline_account_box_24"
-            app:layout_constraintBottom_toBottomOf="@+id/read"
+            android:background="@drawable/baseline_account_box_24_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/read_page1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/read"
-            app:layout_constraintTop_toTopOf="@+id/read" />
+            app:layout_constraintStart_toEndOf="@+id/read_page1"
+            app:layout_constraintTop_toTopOf="@+id/read_page1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="主页"
-            android:textSize="10sp"
-            android:textColor="#000000"
+            android:text="个人"
+            android:id="@+id/main_tv"
+            android:textSize="13sp"
+            android:textColor="#cccccc"
             app:layout_constraintEnd_toEndOf="@+id/main_page"
             app:layout_constraintStart_toStartOf="@+id/main_page"
             app:layout_constraintTop_toTopOf="@+id/practice_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -89,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/navigator">
 
-    </androidx.viewpager2.widget.ViewPager2>
+    </androidx.viewpager.widget.ViewPager>
 
 
 
