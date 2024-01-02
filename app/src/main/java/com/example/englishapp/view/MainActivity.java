@@ -42,14 +42,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mList = new ArrayList<>();
         mList.add(new AdviceFragment());
-        mList.add(new ReadFragment());
+        mList.add(new PracticeFragment());
         mList.add(new MineFragment());
 
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mList);
         viewPager2.setAdapter(fragmentAdapter);
         viewPager2.setCurrentItem(0);
         viewPager2.setOffscreenPageLimit(2);
-
 
     }
 
@@ -129,6 +128,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
 
 }

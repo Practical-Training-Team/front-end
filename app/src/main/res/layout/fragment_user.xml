@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.117" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/mine_history"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -71,7 +71,7 @@
             app:layout_constraintTop_toTopOf="@+id/history_im" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/history_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -87,10 +87,11 @@
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/card_white"
+        android:id="@+id/mine_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/mine_credit">
 
         <ImageView
             android:id="@+id/set_im"
@@ -113,7 +114,7 @@
             app:layout_constraintTop_toTopOf="@+id/set_im" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/setting_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -124,14 +125,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/mine_info"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/card_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/mine_history">
 
         <ImageView
             android:id="@+id/info_im"
@@ -154,7 +155,7 @@
             app:layout_constraintTop_toTopOf="@+id/info_im" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/info_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -165,7 +166,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/mine_credit"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
@@ -173,9 +174,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/mine_info">
 
         <ImageView
+            android:id="@+id/credit_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
