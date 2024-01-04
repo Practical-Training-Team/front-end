@@ -25,7 +25,7 @@ public class PracticeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_practice, container, false);
         init();
         recyclerView = view.findViewById(R.id.practice_rv);
-        recyclerView.setAdapter(new PracticeAdapter(list));
+        recyclerView.setAdapter(new PracticeAdapter(list, getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         return view;
     }

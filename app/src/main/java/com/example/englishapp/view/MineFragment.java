@@ -1,5 +1,7 @@
 package com.example.englishapp.view;
 
+import static com.youth.banner.util.LogUtils.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,12 @@ import androidx.fragment.app.Fragment;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,18 +49,42 @@ public class MineFragment extends Fragment {
         setting = view.findViewById(R.id.setting_next);
         button = view.findViewById(R.id.button);
         button.setOnClickListener(v -> {
-            NetUtil.getInstance().getApi().test(1,2,3).enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    System.out.println(response);
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-
-                }
-            });
+            uploadFile();
         });
     }
 
+
+    private void uploadFile() {
+        // Replace with your file and description
+        File audioFile = new File("/data/data/front-end/test.m4a");
+        String descriptionString = "Audio file description";
+
+        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), descriptionString);
+        RequestBody audioFileRequestBody = RequestBody.create(MediaType.parse("audio/*"), audioFile);
+
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("audioFile", audioFile.getName(), audioFileRequestBody);
+
+        NetUtil.getInstance().getApi().uploadFile(description, filePart).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "onResponse: 1");
+                    // File uploaded successfully
+                    // Handle the response
+                } else {
+                    // File upload failed
+                    // Handle the error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // Request failed
+                Log.d(TAG, "onFailure: 2");
+                // Handle the failure2
+            }
+        });
+    }
 }
+
+
