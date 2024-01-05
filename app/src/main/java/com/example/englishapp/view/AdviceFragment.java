@@ -9,9 +9,12 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.englishapp.AdviceAdapter;
 import com.example.englishapp.DataBean;
+import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.youth.banner.Banner;
@@ -19,11 +22,16 @@ import com.youth.banner.adapter.BannerAdapter;
 import com.youth.banner.indicator.CircleIndicator;
 import com.youth.banner.listener.OnBannerListener;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdviceFragment extends Fragment {
     private static final String TAG = "123456";
-
+    private List<Article> list = new ArrayList<>();
     private Banner banner;
     private RecyclerView recyclerView;
 
@@ -31,6 +39,8 @@ public class AdviceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_advice, container, false);
         banner = view.findViewById(R.id.banner);
         recyclerView = view.findViewById(R.id.advice_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        initList();
 
         ImageAdapter imageAdapter = new ImageAdapter(DataBean.getTestData2());
         //加载本地图片
@@ -48,6 +58,22 @@ public class AdviceFragment extends Fragment {
         return view;
     }
 
+    private void initList() {
+        NetUtil.getInstance().getApi().getAdviceList(1).enqueue(new Callback<List<Article>>() {
+            @Override
+            public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
+                assert response.body() != null;
+                list.addAll(response.body());
+                recyclerView.setAdapter(new AdviceAdapter(list,  getActivity()));
+            }
+
+            @Override
+            public void onFailure(Call<List<Article>> call, Throwable t) {
+
+            }
+        });
+
+    }
     public class ImageAdapter extends BannerAdapter<DataBean, ImageAdapter.ImageHolder> {
         public ImageAdapter(List<DataBean> datas) {
             super(datas);

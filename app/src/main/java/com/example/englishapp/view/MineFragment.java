@@ -47,10 +47,10 @@ public class MineFragment extends Fragment {
         info = view.findViewById(R.id.info_next);
         credit = view.findViewById(R.id.credit_next);
         setting = view.findViewById(R.id.setting_next);
-        button = view.findViewById(R.id.button);
-        button.setOnClickListener(v -> {
-            uploadFile();
-        });
+        //button = view.findViewById(R.id.button);
+//        button.setOnClickListener(v -> {
+//            uploadFile();
+//        });
     }
 
 

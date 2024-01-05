@@ -1,4 +1,7 @@
 package com.example.englishapp;
+import com.example.englishapp.view.Article;
+import com.example.englishapp.view.ArticlePage;
+
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -25,4 +28,13 @@ public interface RetrofitAPI {
             @Part("description") RequestBody description,
             @Part MultipartBody.Part file
     );
+
+    @GET("get_article/")
+    Call<List<Article>> getAdviceList(@Query("user_id")int id);
+
+    @GET("log_in/")
+    Call<Integer> login(@Query("login_account")String login_account, @Query("login_password") String pwd);
+
+    @GET("get_article_content/")
+    Call<ArticlePage> getContent(@Query("article_id") int id);
 }
