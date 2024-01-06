@@ -27,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private String passwd;
     private String acc;
 
+    private static int id = -1;
+
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -64,7 +66,11 @@ public class LoginActivity extends AppCompatActivity {
                 NetUtil.getInstance().getApi().login(acc, passwd).enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-
+                        if(response.body() == -1) {
+                            failed();
+                        } else if (response.body() != -1) {
+                            successful(response.body());
+                        }
                     }
 
                     @Override
@@ -80,7 +86,12 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         });
-
+    }
+    private void failed() {
+        Toast.makeText(this, "失败！请检查输入的账号和密码！", Toast.LENGTH_SHORT).show();
     }
 
+    private void successful(int id) {
+        this.id = id;
+    }
 }

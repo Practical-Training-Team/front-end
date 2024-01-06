@@ -1,11 +1,15 @@
 package com.example.englishapp.view;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +32,8 @@ public class PassageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private int id = -1;
     private List<SentenceBody> list = new ArrayList<>();
+    private String[] permissions = {Manifest.permission.RECORD_AUDIO};
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -36,6 +42,10 @@ public class PassageActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("type", -1);
         initView(id);
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+        }
     }
 
     private void initView(int id) {

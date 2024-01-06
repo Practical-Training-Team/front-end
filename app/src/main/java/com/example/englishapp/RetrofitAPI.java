@@ -16,9 +16,6 @@ import retrofit2.http.Query;
 
 public interface RetrofitAPI {
 
-//    @GET("GetData/")
-//    Call<String> test(@Query("sentence_id") int id, @Query("sort") int sort, @Query("content") int content);
-
     @GET("get_sentence/")
     Call<List<SentenceBody>> getSentence(@Query("sentence_class")int typeId);
 
@@ -37,4 +34,18 @@ public interface RetrofitAPI {
 
     @GET("get_article_content/")
     Call<ArticlePage> getContent(@Query("article_id") int id);
+
+    @GET("register/")
+    Call<Integer> register(@Query("passeord") String password, @Query("account") String account);
+
+    @GET("search_recommendations")
+    Call<List<AdviceItem>> getSearchHotList();
+
+    @GET("Edit_personal_information/")
+    Call<String> changeInfo(@Query("user_id") int id, @Query("name") String name,
+                      @Query("class") String uClass, @Query("faculty") String faculty);
+
+    @GET("audio_api/get_audio/")
+    Call<ResponseBody> getAudio(@Query("sentence") String sentence);
+
 }

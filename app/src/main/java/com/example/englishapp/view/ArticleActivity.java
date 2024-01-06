@@ -23,8 +23,7 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_text_page);
-        String aid = getIntent().getStringExtra("article_id");
-        int id
+        int id = getIntent().getIntExtra("article_id", -1);
         initView();
         initData(id);
     }

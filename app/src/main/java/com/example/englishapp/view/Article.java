@@ -3,7 +3,7 @@ package com.example.englishapp.view;
 
 public class Article {
 
-    private String id;
+    private Integer id;
     private String title;
     private String content;
     private Integer likes;
@@ -11,7 +11,7 @@ public class Article {
     private String release_time;
     private String category;
 
-    public Article(String id, String title, String content, String category, Integer likes, Integer pageView, String releaseTime) {
+    public Article(Integer id, String title, String content, String category, Integer likes, Integer pageView, String releaseTime) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -21,11 +21,11 @@ public class Article {
         this.category = category;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

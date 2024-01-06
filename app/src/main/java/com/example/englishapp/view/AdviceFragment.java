@@ -1,5 +1,6 @@
 package com.example.englishapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,10 +35,16 @@ public class AdviceFragment extends Fragment {
     private List<Article> list = new ArrayList<>();
     private Banner banner;
     private RecyclerView recyclerView;
+    private ImageView search;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_advice, container, false);
         banner = view.findViewById(R.id.banner);
+        search = view.findViewById(R.id.search_im);
+        search.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            startActivity(intent);
+        });
         recyclerView = view.findViewById(R.id.advice_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         initList();

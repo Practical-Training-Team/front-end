@@ -8,7 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -44,29 +49,51 @@ public class RegisterActivity extends AppCompatActivity {
                 Aname = acc;
             }else {
                 Toast.makeText(this,"请输入账号！", Toast.LENGTH_SHORT).show();
-                //return;
+                return;
             }
             if(pwd.getText() != null) {
                 String pwd = account.getText().toString();
             }else {
                 Toast.makeText(this,"请输入密码！", Toast.LENGTH_SHORT).show();
-                //return;
+                return;
             }
             if(repwd.getText() != null) {
                 String pwd = account.getText().toString();
             }else {
                 Toast.makeText(this,"请确认密码！", Toast.LENGTH_SHORT).show();
-                //return;
+                return;
             }
             if (repwd.getText().toString() != null && pwd.getText().toString() != null && !repwd.getText().toString().equals(pwd.getText().toString())) {
                 Toast.makeText(this,"两次输入密码不一致！", Toast.LENGTH_SHORT).show();
-                //return;
+                return;
             }else {
                 password = pwd.getText().toString();
             }
             if (repwd.getText().toString() != null && pwd.getText().toString() != null && repwd.getText().toString().equals(pwd.getText().toString())) {
-                //TODO
+                NetUtil.getInstance().getApi().register(password, Aname).enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        if (response.body() == -1) {
+                            failed();
+                        } else if (response.body() != -1) {
+                            successful();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable t) {
+
+                    }
+                });
             }
         });
+    }
+
+    private void failed() {
+        Toast.makeText(this, "失败！该账号名已被使用，请尝试使用其他账号名！", Toast.LENGTH_SHORT).show();
+    }
+
+    private void successful() {
+        Toast.makeText(this, "成功！请返回登录！", Toast.LENGTH_SHORT).show();
     }
 }
