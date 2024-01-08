@@ -1,6 +1,9 @@
 package com.example.englishapp;
-import com.example.englishapp.view.Article;
-import com.example.englishapp.view.ArticlePage;
+
+import com.example.englishapp.databean.AdviceItem;
+import com.example.englishapp.databean.Article;
+import com.example.englishapp.databean.ArticlePage;
+import com.example.englishapp.databean.SentenceBody;
 
 import java.util.List;
 

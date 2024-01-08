@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.englishapp.databean.ArticlePage;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
 

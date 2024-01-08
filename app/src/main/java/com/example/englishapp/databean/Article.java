@@ -1,4 +1,4 @@
-package com.example.englishapp.view;
+package com.example.englishapp.databean;
 
 
 public class Article {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.englishapp.PracticeAdapter;
 import com.example.englishapp.R;
+import com.example.englishapp.databean.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,22 +32,22 @@ public class PracticeFragment extends Fragment {
     }
 
     private void init() {
-        list.add(new Type(0, "日常生活是人们在日复一日中进行的一系列活动和经历，包括休闲、社交、个人护理等方面。"
-                , BitmapFactory.decodeResource(getResources(), R.mipmap.life), "日常生活"));
+        list.add(new Type(0, "一种开放、灵活的心态，通过独特的观点和创意的组合，寻找新颖解决方案并推动进步。"
+                , BitmapFactory.decodeResource(getResources(), R.mipmap.innovation), "创新思维"));
 
         list.add(new Type(1, "每一次旅程都是一段难忘的故事，留下的不仅是风景的美好，更是内心深处的成长与回忆。",
                 BitmapFactory.decodeResource(getResources(), R.mipmap.trip), "旅行见闻"));
 
-        list.add(new Type(2, "无论是在大银幕上感受震撼的视觉效果，还是在耳边享受动人的音乐旋律，影音娱乐都为生活增添了无尽的乐趣和情感体验。",
-                BitmapFactory.decodeResource(getResources(), R.mipmap.macro), "影音娱乐"));
+        list.add(new Type(2, "国家采取组织、装备和战略手段，维护国家安全、捍卫主权，并在面临威胁时采取行动保障国家的独立和稳定。",
+                BitmapFactory.decodeResource(getResources(), R.mipmap.military), "国防军事"));
 
-        list.add(new Type(3, "网络科技推动着信息的高速传递，连接了世界各地的人们，使得跨越时空的沟通变得轻松而便利。",
-                BitmapFactory.decodeResource(getResources(), R.mipmap.net), "网络科技"));
+        list.add(new Type(3, "个体通过观察和经历，获取对社会各方面事物、现象和文化的广泛了解和认知。",
+                BitmapFactory.decodeResource(getResources(), R.mipmap.society), "社会见闻"));
 
-        list.add(new Type(4, "商业职场是充满竞争与机遇的舞台，汇聚着各类专业人才和企业精英，人们通过合作与竞争塑造着商业格局，追求创新、效益和可持续发展。",
-                BitmapFactory.decodeResource(getResources(), R.mipmap.job), "商业职场"));
+        list.add(new Type(4, "采取可持续的行动，维护和平衡自然系统，以减少人类活动对生态系统的负面影响，确保地球资源的可持续利用和生态平衡的持续稳定。",
+                BitmapFactory.decodeResource(getResources(), R.mipmap.enviroment), "生态环境"));
 
-        list.add(new Type(5, "体育运动是一项融合了竞技、健康和团队协作的活动，是人们通过运动来强身健体、锻炼意志和享受乐趣的重要方式。",
-                BitmapFactory.decodeResource(getResources(), R.mipmap.sport), "体育运动"));
+        list.add(new Type(5, "通过良好的生活习惯和行为选择，促进身体、心理和社交的整体健康，以实现长期幸福和生活品质的提升。",
+                BitmapFactory.decodeResource(getResources(), R.mipmap.healthy), "养生健康"));
     }
 }

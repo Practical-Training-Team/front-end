@@ -1,4 +1,6 @@
-package com.example.englishapp;
+package com.example.englishapp.databean;
+
+import com.example.englishapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

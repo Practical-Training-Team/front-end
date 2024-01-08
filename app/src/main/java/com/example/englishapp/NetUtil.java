@@ -14,7 +14,7 @@ public class NetUtil {
     private final OkHttpClient client;
     private final RetrofitAPI api;
     private final Gson gson;
-    private static final String baseUrl = "http://10.135.48.46:8000/";
+    private static final String baseUrl = "http://10.135.116.43:8000/";
 
     private NetUtil() {
         gson = new Gson();

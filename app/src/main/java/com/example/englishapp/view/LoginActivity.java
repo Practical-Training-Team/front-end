@@ -1,6 +1,10 @@
 package com.example.englishapp.view;
 
+import static com.example.englishapp.view.SearchActivity.PREF_NAME;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,12 +26,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText pwd;
     private Button login;
     private TextView register;
-    private TextView title;
-    private TextView changePwd;
     private String passwd;
     private String acc;
 
-    private static int id = -1;
+    public static final String KEY_INT_VALUE = "intValue";
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -43,13 +45,10 @@ public class LoginActivity extends AppCompatActivity {
         pwd = findViewById(R.id.login_pwd);
         login = findViewById(R.id.login);
         register = findViewById(R.id.login_register);
-        title = findViewById(R.id.log_title);
     }
 
     private void initListener() {
         login.setOnClickListener(v->{
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
             if(account.getText() != null ) {
                 acc = account.getText().toString();
             }else {
@@ -81,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-
         register.setOnClickListener(v -> {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
@@ -92,6 +90,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void successful(int id) {
-        this.id = id;
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(KEY_INT_VALUE, id);
+        editor.apply();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.englishapp.view;
+package com.example.englishapp.databean;
 
 import android.graphics.Bitmap;
 

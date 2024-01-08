@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.PassageAdapter;
 import com.example.englishapp.R;
-import com.example.englishapp.SentenceBody;
+import com.example.englishapp.databean.SentenceBody;
 
 import java.util.ArrayList;
 import java.util.List;

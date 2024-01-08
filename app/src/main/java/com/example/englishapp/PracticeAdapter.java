@@ -1,7 +1,5 @@
 package com.example.englishapp;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,10 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.englishapp.databean.Type;
 import com.example.englishapp.view.PassageActivity;
-import com.example.englishapp.view.Type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeAdapter extends RecyclerView.Adapter<PracticeAdapter.ViewHolder> {

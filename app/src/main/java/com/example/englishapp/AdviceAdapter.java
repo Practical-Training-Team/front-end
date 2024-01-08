@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.englishapp.view.Article;
+import com.example.englishapp.databean.Article;
 import com.example.englishapp.view.ArticleActivity;
 
 import java.util.List;

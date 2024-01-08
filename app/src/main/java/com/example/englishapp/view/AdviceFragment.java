@@ -1,6 +1,11 @@
 package com.example.englishapp.view;
 
+import static com.example.englishapp.view.LoginActivity.KEY_INT_VALUE;
+import static com.example.englishapp.view.SearchActivity.PREF_NAME;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.englishapp.AdviceAdapter;
-import com.example.englishapp.DataBean;
+import com.example.englishapp.databean.Article;
+import com.example.englishapp.databean.DataBean;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,7 +53,7 @@ public class AdviceFragment extends Fragment {
         });
         recyclerView = view.findViewById(R.id.advice_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        initList();
+        //initList();
 
         ImageAdapter imageAdapter = new ImageAdapter(DataBean.getTestData2());
         //加载本地图片
@@ -66,7 +72,9 @@ public class AdviceFragment extends Fragment {
     }
 
     private void initList() {
-        NetUtil.getInstance().getApi().getAdviceList(1).enqueue(new Callback<List<Article>>() {
+        SharedPreferences preferences = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        int id =  preferences.getInt(KEY_INT_VALUE, 0);
+        NetUtil.getInstance().getApi().getAdviceList(id).enqueue(new Callback<List<Article>>() {
             @Override
             public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
                 assert response.body() != null;

@@ -73,9 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
                 NetUtil.getInstance().getApi().register(password, Aname).enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-                        if (response.body() == -1) {
+                        if (response.body() == 0) {
                             failed();
-                        } else if (response.body() != -1) {
+                        } else if (response.body() != 0) {
                             successful();
                         }
                     }

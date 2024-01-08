@@ -1,22 +1,20 @@
 package com.example.englishapp;
 
 import android.Manifest;
-import android.content.SharedPreferences;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.Environment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.englishapp.databean.Sentence;
+import com.example.englishapp.databean.SentenceBody;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,7 +31,7 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
     private List<Sentence> list;
     private List<SentenceBody> list_test;
     private List<Boolean> isRecordingList;
-    private static final String TAG = "test test test";
+    private static final String TAG = "testv vvv test test";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     private String[] permissions = {Manifest.permission.RECORD_AUDIO};
 
@@ -59,7 +57,7 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
         holder.Read.setOnClickListener(v -> {
             onRecordButtonClick(position);
         });
-        holder.Play.setOnClickListener(v -> getAudioFile(holder.Content.getText().toString()));
+        holder.Play.setOnClickListener(v -> getAudioFile(holder.Content.getText().toString(), list_test.get(position).getId()));
         holder.Content.setText(list_test.get(position).getContent().toString());
         holder.Number.setText(String.valueOf(position + 1));
     }
@@ -117,7 +115,7 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
         mediaRecorder = null;
     }
 
-    private void getAudioFile(String sentence) {
+    private void getAudioFile(String sentence, int id) {
         NetUtil.getInstance().getApi().getAudio(sentence).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -142,7 +140,7 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
             try {
                 ResponseBody responseBody = responseBodies[0];
                 InputStream inputStream = responseBody.byteStream();
-                File file = new File(Environment.getExternalStorageDirectory(), "downloaded_file.mp3");
+                File file = new File(Environment.getExternalStorageDirectory(), "audio.mp3");
                 FileOutputStream outputStream = new FileOutputStream(file);
                 byte[] buffer = new byte[4096];
                 int bytesRead;
