@@ -53,7 +53,7 @@ public class AdviceFragment extends Fragment {
         });
         recyclerView = view.findViewById(R.id.advice_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //initList();
+        initList();
 
         ImageAdapter imageAdapter = new ImageAdapter(DataBean.getTestData2());
         //加载本地图片
@@ -74,6 +74,7 @@ public class AdviceFragment extends Fragment {
     private void initList() {
         SharedPreferences preferences = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         int id =  preferences.getInt(KEY_INT_VALUE, 0);
+        System.out.println("ididid" + id);
         NetUtil.getInstance().getApi().getAdviceList(id).enqueue(new Callback<List<Article>>() {
             @Override
             public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {

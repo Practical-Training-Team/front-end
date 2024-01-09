@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.englishapp.databean.AdviceItem;
+import com.example.englishapp.databean.Article;
 import com.example.englishapp.databean.ArticlePage;
 import com.example.englishapp.view.ArticleActivity;
 
@@ -19,10 +20,10 @@ import java.util.List;
 
 public class HotRankAdapter extends RecyclerView.Adapter<HotRankAdapter.HotRankViewHolder> {
 
-    private List<AdviceItem> rankItem;
+    private List<Article> rankItem;
     private Activity activity;
 
-    public HotRankAdapter(List<AdviceItem> list, Activity activity) {
+    public HotRankAdapter(List<Article> list, Activity activity) {
         rankItem = list;
         this.activity = activity;
     }
@@ -35,7 +36,7 @@ public class HotRankAdapter extends RecyclerView.Adapter<HotRankAdapter.HotRankV
 
     @Override
     public void onBindViewHolder(@NonNull HotRankViewHolder holder, int position) {
-        holder.rank.setText(rankItem.get(position).getTitle().toString());
+        holder.rank.setText(rankItem.get(position).getTitle());
         holder.rank.setOnClickListener(v -> {
             Intent intent = new Intent(activity, ArticleActivity.class);
             intent.putExtra("article_id", rankItem.get(position).getArticle_id());

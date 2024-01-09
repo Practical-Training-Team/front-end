@@ -2,6 +2,7 @@ package com.example.englishapp.view;
 
 import static com.youth.banner.util.LogUtils.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,45 +47,20 @@ public class MineFragment extends Fragment {
         history = view.findViewById(R.id.history_next);
         info = view.findViewById(R.id.info_next);
         credit = view.findViewById(R.id.credit_next);
-        setting = view.findViewById(R.id.setting_next);
-        //button = view.findViewById(R.id.button);
-//        button.setOnClickListener(v -> {
-//            uploadFile();
-//        });
-    }
-
-
-    private void uploadFile() {
-        // Replace with your file and description
-        File audioFile = new File("/data/data/front-end/test.m4a");
-        String descriptionString = "Audio file description";
-
-        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), descriptionString);
-        RequestBody audioFileRequestBody = RequestBody.create(MediaType.parse("audio/*"), audioFile);
-
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("audioFile", audioFile.getName(), audioFileRequestBody);
-
-        NetUtil.getInstance().getApi().uploadFile(description, filePart).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "onResponse: 1");
-                    // File uploaded successfully
-                    // Handle the response
-                } else {
-                    // File upload failed
-                    // Handle the error
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // Request failed
-                Log.d(TAG, "onFailure: 2");
-                // Handle the failure2
-            }
+        credit.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), CreditActivity.class);
+            startActivity(intent);
         });
+        creditLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), CreditActivity.class);
+            startActivity(intent);
+        });
+        setting = view.findViewById(R.id.setting_next);
+
     }
+
+
+
 }
 
 

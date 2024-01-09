@@ -29,20 +29,20 @@ public interface RetrofitAPI {
             @Part MultipartBody.Part file
     );
 
-    @GET("get_article/")
+    @GET("articles/article/")
     Call<List<Article>> getAdviceList(@Query("user_id")int id);
 
-    @GET("log_in/")
+    @GET("signupsignin/signin/")
     Call<Integer> login(@Query("login_account")String login_account, @Query("login_password") String pwd);
 
-    @GET("get_article_content/")
-    Call<ArticlePage> getContent(@Query("article_id") int id);
+    @GET("articles/singlearticle/")
+    Call<Article> getContent(@Query("article_id") int id);
 
-    @GET("register/")
+    @GET("signupsignin/signup/")
     Call<Integer> register(@Query("passeord") String password, @Query("account") String account);
 
-    @GET("search_recommendations")
-    Call<List<AdviceItem>> getSearchHotList();
+    @GET("articles/articlepopularitylist/")
+    Call<List<Article>> getSearchHotList();
 
     @GET("Edit_personal_information/")
     Call<String> changeInfo(@Query("user_id") int id, @Query("name") String name,
@@ -51,4 +51,6 @@ public interface RetrofitAPI {
     @GET("audio_api/get_audio/")
     Call<ResponseBody> getAudio(@Query("sentence") String sentence);
 
+    @GET("articles/search/")
+    Call<List<Article>> search(@Query("keywords") String keywords);
 }

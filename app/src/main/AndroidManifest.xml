@@ -34,6 +34,8 @@
         <activity android:name=".view.SearchActivity"/>
         <activity android:name=".view.PassageActivity"/>
         <activity android:name=".view.MainActivity"/>
+        <activity android:name=".view.CreditActivity"/>
+        <activity android:name=".view.SearchResultActivity"/>
     </application>
 
 </manifest>

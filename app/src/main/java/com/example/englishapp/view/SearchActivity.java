@@ -1,8 +1,10 @@
 package com.example.englishapp.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ import com.example.englishapp.HotRankAdapter;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
 import com.example.englishapp.databean.AdviceItem;
+import com.example.englishapp.databean.Article;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +41,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView history, hot;
     private EditText search;
     private List<String> historyList = new ArrayList<>();
-    private List<AdviceItem> hotList = new ArrayList<>();
+    private List<Article> hotList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -56,25 +59,27 @@ public class SearchActivity extends AppCompatActivity {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     String query = search.getText().toString();
                     addToSearchHistory(query);
-                    Search();
+                    Search(query);
                 }
                 return false;
             }
         });
 
-        NetUtil.getInstance().getApi().getSearchHotList().enqueue(new Callback<List<AdviceItem>>() {
+        NetUtil.getInstance().getApi().getSearchHotList().enqueue(new Callback<List<Article>>() {
             @Override
-            public void onResponse(Call<List<AdviceItem>> call, Response<List<AdviceItem>> response) {
+            public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
+                Log.d("112", "onResponse: ");
+                Log.d("123123", "onResponse: "+response.body().toString());
                 assert response.body() != null;
                 hotList.addAll(response.body());
+                hot.setAdapter(new HotRankAdapter(hotList, SearchActivity.this));
             }
 
             @Override
-            public void onFailure(Call<List<AdviceItem>> call, Throwable t) {
+            public void onFailure(Call<List<Article>> call, Throwable t) {
 
             }
         });
-        hot.setAdapter(new HotRankAdapter(hotList, this));
     }
 
     private void initView() {
@@ -115,8 +120,10 @@ public class SearchActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void Search() {
-
+    private void Search(String keywords) {
+        Intent intent = new Intent(this, SearchResultActivity.class);
+        intent.putExtra("keywords", keywords);
+        startActivity(intent);
     }
 
 }

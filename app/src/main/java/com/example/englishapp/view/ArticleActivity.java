@@ -1,11 +1,14 @@
 package com.example.englishapp.view;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.example.englishapp.databean.Article;
 import com.example.englishapp.databean.ArticlePage;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
@@ -18,7 +21,7 @@ public class ArticleActivity extends AppCompatActivity {
 
     private TextView title, content, thumbNum, readNum, time;
     private ImageView thumb, back, picture;
-    ArticlePage articlePage;
+    Article articlePage;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -30,7 +33,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        title = findViewById(R.id.article_title);
+        title = findViewById(R.id.article_title1);
         picture = findViewById(R.id.article_im);
         content = findViewById(R.id.article_content);
         thumbNum = findViewById(R.id.article_thumb_num);
@@ -42,19 +45,21 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void initData(int id) {
-        NetUtil.getInstance().getApi().getContent(id).enqueue(new Callback<ArticlePage>() {
+        NetUtil.getInstance().getApi().getContent(id).enqueue(new Callback<Article>() {
             @Override
-            public void onResponse(Call<ArticlePage> call, Response<ArticlePage> response) {
+            public void onResponse(Call<Article> call, Response<Article> response) {
                 articlePage = response.body();
                 title.setText(articlePage.getTitle());
                 content.setText(articlePage.getContent());
                 thumbNum.setText("点赞数: "+articlePage.getLikes());
                 readNum.setText("阅读数： "+articlePage.getPage_view());
                 time.setText("发布时间："+ articlePage.getRelease_time());
+                Uri uri = Uri.parse(response.body().getImage());
+                Glide.with(ArticleActivity.this).load(uri).into(picture);
             }
 
             @Override
-            public void onFailure(Call<ArticlePage> call, Throwable t) {
+            public void onFailure(Call<Article> call, Throwable t) {
 
             }
         });

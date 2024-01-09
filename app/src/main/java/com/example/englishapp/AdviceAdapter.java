@@ -2,6 +2,8 @@ package com.example.englishapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.englishapp.databean.Article;
 import com.example.englishapp.view.ArticleActivity;
 
@@ -35,11 +38,14 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull AdviceAdapter.ViewHolder holder, int position) {
+        Uri uri = Uri.parse(list.get(position).getImage());
         holder.title.setText(list.get(position).getTitle());
         holder.type.setText(list.get(position).getCategory());
+        Glide.with(activity).load(uri).into(holder.image);
         holder.layout.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ArticleActivity.class);
-            intent.putExtra("article_id", list.get(position).getId());
+            intent.putExtra("article_id", list.get(position).getArticle_id());
+            Log.d("articleid" , list.get(position).getArticle_id() + "\\");
             activity.startActivity(intent);
         });
     }
