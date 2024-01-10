@@ -21,7 +21,6 @@
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:text="标题标题标题"
+            android:lineSpacingMultiplier="1.5"
             android:textColor="#000000"
             android:textSize="17sp"
+            android:maxLines="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/advice_im"
             app:layout_constraintTop_toTopOf="@+id/advice_im" />
@@ -42,15 +43,17 @@
             android:id="@+id/advice_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/card_yellow"
             android:paddingStart="2dp"
             android:paddingEnd="2dp"
             android:text="类型类型"
             android:textColor="#ffffff"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/advice_im"
-            app:layout_constraintStart_toStartOf="@+id/advice_title" />
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/advice_im"
+            app:layout_constraintTop_toBottomOf="@+id/advice_im" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,21 +1,23 @@
 package com.example.englishapp.databean;
 
-import java.io.File;
-
 public class Sentence {
 
 
-    private int id;
+    private int sentence_id;
     private String content;
 
     private String url;
 
-    public int getId() {
-        return id;
+
+
+    private int category;
+
+    public int getSentence_id() {
+        return sentence_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSentence_id(int sentence_id) {
+        this.sentence_id = sentence_id;
     }
 
     public String getContent() {
@@ -35,9 +37,18 @@ public class Sentence {
     }
 
 
-    public Sentence(int id, String content, String url) {
-        this.id = id;
+    public Sentence(int id, int category, String content, String url) {
+        this.sentence_id = id;
         this.content = content;
         this.url = url;
+        this.category = category;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 }

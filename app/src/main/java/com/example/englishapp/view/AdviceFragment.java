@@ -18,11 +18,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.englishapp.AdviceAdapter;
-import com.example.englishapp.databean.Article;
-import com.example.englishapp.databean.DataBean;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
+import com.example.englishapp.databean.Article;
+import com.example.englishapp.databean.DataBean;
 import com.google.android.material.snackbar.Snackbar;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerAdapter;
@@ -42,6 +43,7 @@ public class AdviceFragment extends Fragment {
     private Banner banner;
     private RecyclerView recyclerView;
     private ImageView search;
+    private List<DataBean> beanList = new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_advice, container, false);
@@ -54,33 +56,20 @@ public class AdviceFragment extends Fragment {
         recyclerView = view.findViewById(R.id.advice_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         initList();
-
-        ImageAdapter imageAdapter = new ImageAdapter(DataBean.getTestData2());
-        //加载本地图片
-        banner.setAdapter(imageAdapter)
-                .addBannerLifecycleObserver(this)
-                .setIndicator(new CircleIndicator(this.getActivity()))
-                .setOnBannerListener(new OnBannerListener() {
-                    @Override
-                    public void OnBannerClick(Object data, int position) {
-                        Snackbar.make(banner, ((DataBean) data).title, Snackbar.LENGTH_SHORT).show();
-                        Log.i(TAG, "position: " + position);
-                    }
-                });
-
+        getHotList();
         return view;
     }
 
     private void initList() {
         SharedPreferences preferences = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         int id =  preferences.getInt(KEY_INT_VALUE, 0);
-        System.out.println("ididid" + id);
         NetUtil.getInstance().getApi().getAdviceList(id).enqueue(new Callback<List<Article>>() {
             @Override
             public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
-                assert response.body() != null;
-                list.addAll(response.body());
-                recyclerView.setAdapter(new AdviceAdapter(list,  getActivity()));
+                if (response.body() != null) {
+                    list.addAll(response.body());
+                    recyclerView.setAdapter(new AdviceAdapter(list, getActivity()));
+                }
             }
 
             @Override
@@ -88,8 +77,36 @@ public class AdviceFragment extends Fragment {
 
             }
         });
-
     }
+
+    private void getHotList() {
+        NetUtil.getInstance().getApi().getSearchHotList().enqueue(new Callback<List<Article>>() {
+            @Override
+            public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
+                for(int i =0; i < response.body().size(); i++) {
+                    beanList.add(new DataBean(response.body().get(i).getImage(), null, 1));
+                }
+                ImageAdapter imageAdapter = new ImageAdapter(beanList);
+                //加载本地图片
+                banner.setAdapter(imageAdapter)
+                        .addBannerLifecycleObserver(getActivity())
+                        .setIndicator(new CircleIndicator(getActivity()))
+                        .setOnBannerListener(new OnBannerListener() {
+                            @Override
+                            public void OnBannerClick(Object data, int position) {
+                                Snackbar.make(banner, ((DataBean) data).title, Snackbar.LENGTH_SHORT).show();
+                                Log.i(TAG, "position: " + position);
+                            }
+                        });
+            }
+
+            @Override
+            public void onFailure(Call<List<Article>> call, Throwable t) {
+
+            }
+        });
+    }
+
     public class ImageAdapter extends BannerAdapter<DataBean, ImageAdapter.ImageHolder> {
         public ImageAdapter(List<DataBean> datas) {
             super(datas);
@@ -114,7 +131,7 @@ public class AdviceFragment extends Fragment {
 
         @Override
         public void onBindView(ImageHolder holder, DataBean data, int position, int size) {
-            holder.imageView.setImageResource(data.imageRes);
+            Glide.with(getActivity()).load(data.imageUrl).into(holder.imageView);
         }
 
         public static class ImageHolder extends RecyclerView.ViewHolder {

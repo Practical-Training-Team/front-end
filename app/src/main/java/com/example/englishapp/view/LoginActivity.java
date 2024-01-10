@@ -5,6 +5,7 @@ import static com.example.englishapp.view.SearchActivity.PREF_NAME;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_login);
 
+//        SharedPreferences preferences = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+//        int uid =  preferences.getInt(KEY_INT_VALUE, 0);
+//        if (uid != 0) {
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//        }
         initView();
         initListener();
     }
@@ -45,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         pwd = findViewById(R.id.login_pwd);
         login = findViewById(R.id.login);
         register = findViewById(R.id.login_register);
+        register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
     private void initListener() {

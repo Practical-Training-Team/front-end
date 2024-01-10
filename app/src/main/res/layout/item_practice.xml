@@ -11,9 +11,9 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/read"
+        app:layout_constraintBottom_toBottomOf="@+id/content_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/play"
+        app:layout_constraintTop_toTopOf="@+id/content_tv"
         app:srcCompat="@drawable/number" />
 
     <TextView
@@ -39,35 +39,44 @@
         android:layout_height="70dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/card_double"
-        android:text="1234568789"
-        android:paddingStart="7dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/card_grey_double"
         android:padding="5dp"
+        android:paddingStart="7dp"
+        android:text="1234568789"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/read"
-        app:layout_constraintEnd_toStartOf="@+id/play"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/number"
-        app:layout_constraintTop_toTopOf="@+id/play" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/play"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_play_circle_filled_24" />
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/read"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content_tv"
+        app:srcCompat="@mipmap/play" />
 
     <ImageView
         android:id="@+id/read"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/baseline_mic_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/play"
-        app:layout_constraintTop_toBottomOf="@+id/play" />
+        android:background="@mipmap/mic2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/play" />
+
+    <ImageView
+        android:id="@+id/result"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/read"
+        app:layout_constraintTop_toTopOf="@+id/read" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

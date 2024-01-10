@@ -41,17 +41,8 @@ public class PracticeAdapter extends RecyclerView.Adapter<PracticeAdapter.ViewHo
         holder.description.setText(list.get(position).getDescription());
         holder.name.setText(list.get(position).getName());
         holder.layout.setOnClickListener(v -> {
-            int id = -1;
-            switch (list.get(position).getName()){
-                case "日常生活": id = 0;break;
-                case "旅行见闻": id = 1;break;
-                case "影音娱乐": id = 2;break;
-                case "网络科技": id = 3;break;
-                case "商业职场": id = 4;break;
-                case "体育运动": id = 5;break;
-            }
             Intent intent = new Intent(mActivity, PassageActivity.class);
-            intent.putExtra("type", id);
+            intent.putExtra("type", list.get(position).getId());
             mActivity.startActivity(intent);
         });
     }

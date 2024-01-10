@@ -1,9 +1,9 @@
 package com.example.englishapp;
 
-import com.example.englishapp.databean.AdviceItem;
 import com.example.englishapp.databean.Article;
-import com.example.englishapp.databean.ArticlePage;
-import com.example.englishapp.databean.SentenceBody;
+import com.example.englishapp.databean.History;
+import com.example.englishapp.databean.Result;
+import com.example.englishapp.databean.Sentence;
 
 import java.util.List;
 
@@ -19,14 +19,14 @@ import retrofit2.http.Query;
 
 public interface RetrofitAPI {
 
-    @GET("get_sentence/")
-    Call<List<SentenceBody>> getSentence(@Query("sentence_class")int typeId);
+    @GET("score/sentence/")
+    Call<List<Sentence>> getSentence(@Query("sentence_cate")int typeId);
 
     @Multipart
-    @POST("upload")
-    Call<ResponseBody> uploadFile(
+    @POST("upload_audio/upload/audio/")
+    Call<ResponseBody> uploadFile(@Part("id")int id,
             @Part("description") RequestBody description,
-            @Part MultipartBody.Part file
+            @Part MultipartBody.Part audioFile
     );
 
     @GET("articles/article/")
@@ -39,18 +39,29 @@ public interface RetrofitAPI {
     Call<Article> getContent(@Query("article_id") int id);
 
     @GET("signupsignin/signup/")
-    Call<Integer> register(@Query("passeord") String password, @Query("account") String account);
+    Call<Integer> register(@Query("password") String password, @Query("account") String account);
 
     @GET("articles/articlepopularitylist/")
     Call<List<Article>> getSearchHotList();
 
-    @GET("Edit_personal_information/")
-    Call<String> changeInfo(@Query("user_id") int id, @Query("name") String name,
-                      @Query("class") String uClass, @Query("faculty") String faculty);
+//    @GET("Edit_personal_information/")
+//    Call<String> changeInfo(@Query("user_id") int id, @Query("name") String name,
+//                      @Query("class") String uClass, @Query("faculty") String faculty);
 
-    @GET("audio_api/get_audio/")
-    Call<ResponseBody> getAudio(@Query("sentence") String sentence);
+//    @GET("audio_api/get_audio/")
+//    Call<ResponseBody> getAudio(@Query("sentence") String sentence);
 
     @GET("articles/search/")
     Call<List<Article>> search(@Query("keywords") String keywords);
+
+    @GET("articles/likes/")
+    Call<Integer> thumb(@Query("user_id") int uid, @Query("article_id") int aid);
+
+    @GET("score/analysis/?url=http://10.135.116.43:8080/create_audios/1.mp3")
+    Call<Result> getResult();
+
+    @GET("userfunction/history/")
+    Call<List<History>> getHistory(@Query("user_id") int id);
+
+
 }

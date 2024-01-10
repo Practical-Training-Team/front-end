@@ -40,7 +40,16 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.ViewHolder
     public void onBindViewHolder(@NonNull AdviceAdapter.ViewHolder holder, int position) {
         Uri uri = Uri.parse(list.get(position).getImage());
         holder.title.setText(list.get(position).getTitle());
-        holder.type.setText(list.get(position).getCategory());
+        switch (list.get(position).getCategory()){
+            case "0":holder.type.setText("养生健康"); break;
+            case "1":holder.type.setText("旅行见闻"); break;
+            case "2":holder.type.setText("社会见闻"); break;
+            case "3":holder.type.setText("国防军事"); break;
+            case "4":holder.type.setText("创新思维"); break;
+            case "5":holder.type.setText("生态环境"); break;
+
+        }
+        //holder.type.setText(list.get(position).getCategory());
         Glide.with(activity).load(uri).into(holder.image);
         holder.layout.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ArticleActivity.class);

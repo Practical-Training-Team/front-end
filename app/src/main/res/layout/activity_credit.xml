@@ -18,12 +18,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/card_white"
         app:layout_constraintTop_toBottomOf="@+id/textview">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,12 +38,11 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/card_yellow"
                 android:text="春华秋实"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <ImageView
                 android:id="@+id/january"
@@ -48,7 +50,7 @@
                 android:layout_height="105dp"
                 android:layout_marginTop="20dp"
                 android:background="@mipmap/january"
-                app:layout_constraintEnd_toStartOf="@+id/febrary"
+                app:layout_constraintEnd_toStartOf="@+id/february"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -63,7 +65,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/january" />
 
             <ImageView
-                android:id="@+id/febrary"
+                android:id="@+id/february"
                 android:layout_width="120dp"
                 android:layout_height="105dp"
                 android:background="@mipmap/february"
@@ -77,8 +79,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="二月·清莲"
-                app:layout_constraintEnd_toEndOf="@+id/febrary"
-                app:layout_constraintStart_toStartOf="@+id/febrary"
+                app:layout_constraintEnd_toEndOf="@+id/february"
+                app:layout_constraintStart_toStartOf="@+id/february"
                 app:layout_constraintTop_toTopOf="@+id/textView6" />
 
             <ImageView
@@ -88,7 +90,7 @@
                 android:background="@mipmap/march"
                 app:layout_constraintBottom_toBottomOf="@+id/january"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/febrary"
+                app:layout_constraintStart_toEndOf="@+id/february"
                 app:layout_constraintTop_toTopOf="@+id/january"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -107,8 +109,8 @@
                 android:layout_height="105dp"
                 android:background="@mipmap/may"
                 app:layout_constraintBottom_toBottomOf="@+id/april"
-                app:layout_constraintEnd_toEndOf="@+id/febrary"
-                app:layout_constraintStart_toStartOf="@+id/febrary"
+                app:layout_constraintEnd_toEndOf="@+id/february"
+                app:layout_constraintStart_toStartOf="@+id/february"
                 app:layout_constraintTop_toTopOf="@+id/april" />
 
             <TextView
@@ -279,6 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/card_yellow"
                 android:text="文章阅读"
                 app:layout_constraintStart_toStartOf="parent"
@@ -310,8 +313,8 @@
                 android:layout_height="120dp"
                 android:background="@mipmap/book2"
                 app:layout_constraintBottom_toBottomOf="@+id/book1"
-                app:layout_constraintEnd_toEndOf="@+id/febrary"
-                app:layout_constraintStart_toStartOf="@+id/febrary"
+                app:layout_constraintEnd_toEndOf="@+id/february"
+                app:layout_constraintStart_toStartOf="@+id/february"
                 app:layout_constraintTop_toTopOf="@+id/book1" />
 
             <TextView
@@ -379,8 +382,8 @@
                 android:layout_height="120dp"
                 android:background="@mipmap/sentence2"
                 app:layout_constraintBottom_toBottomOf="@+id/sentence1"
-                app:layout_constraintEnd_toEndOf="@+id/febrary"
-                app:layout_constraintStart_toStartOf="@+id/febrary"
+                app:layout_constraintEnd_toEndOf="@+id/february"
+                app:layout_constraintStart_toStartOf="@+id/february"
                 app:layout_constraintTop_toTopOf="@+id/sentence1" />
 
             <TextView
@@ -399,9 +402,10 @@
                 android:layout_height="120dp"
                 android:background="@mipmap/sentence3"
                 app:layout_constraintBottom_toBottomOf="@+id/sentence2"
-                app:layout_constraintEnd_toEndOf="@+id/march"
+                app:layout_constraintEnd_toEndOf="@+id/punch3"
                 app:layout_constraintStart_toStartOf="@+id/march"
-                app:layout_constraintTop_toTopOf="@+id/sentence2" />
+                app:layout_constraintTop_toTopOf="@+id/sentence2"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -410,6 +414,76 @@
                 app:layout_constraintEnd_toEndOf="@+id/sentence3"
                 app:layout_constraintStart_toStartOf="@+id/sentence3"
                 app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/card_yellow"
+                android:text="学习打卡"
+                app:layout_constraintEnd_toEndOf="@+id/textView19"
+                app:layout_constraintStart_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <ImageView
+                android:id="@+id/punch1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:background="@mipmap/punch1"
+                app:layout_constraintEnd_toEndOf="@+id/january"
+                app:layout_constraintStart_toStartOf="@+id/january"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="滴水石穿"
+                app:layout_constraintEnd_toEndOf="@+id/punch1"
+                app:layout_constraintStart_toStartOf="@+id/punch1"
+                app:layout_constraintTop_toBottomOf="@+id/punch1" />
+
+            <ImageView
+                android:id="@+id/punch2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@mipmap/punch2"
+                app:layout_constraintBottom_toBottomOf="@+id/punch1"
+                app:layout_constraintEnd_toEndOf="@+id/sentence2"
+                app:layout_constraintStart_toStartOf="@+id/sentence2"
+                app:layout_constraintTop_toTopOf="@+id/punch1" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="学贵有恒"
+                app:layout_constraintEnd_toEndOf="@+id/punch2"
+                app:layout_constraintStart_toStartOf="@+id/punch2"
+                app:layout_constraintTop_toBottomOf="@+id/punch2" />
+
+            <ImageView
+                android:id="@+id/punch3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@mipmap/punch3"
+                app:layout_constraintBottom_toBottomOf="@+id/punch2"
+                app:layout_constraintEnd_toEndOf="@+id/march"
+                app:layout_constraintStart_toStartOf="@+id/march"
+                app:layout_constraintTop_toTopOf="@+id/punch2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="毫不动摇"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/punch3"
+                app:layout_constraintStart_toStartOf="@+id/punch3"
+                app:layout_constraintTop_toBottomOf="@+id/punch3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

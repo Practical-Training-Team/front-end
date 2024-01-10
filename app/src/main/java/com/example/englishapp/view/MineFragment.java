@@ -29,8 +29,8 @@ import retrofit2.Response;
 
 public class MineFragment extends Fragment {
 
-    private ConstraintLayout historyLayout, infoLayout, creditLayout, settingLayout;
-    private ImageView history, info, credit, setting;
+    private ConstraintLayout historyLayout, infoLayout, creditLayout, settingLayout, punchLayout;
+    private ImageView history, info, credit, setting, punch;
     private Button button;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +56,16 @@ public class MineFragment extends Fragment {
             startActivity(intent);
         });
         setting = view.findViewById(R.id.setting_next);
-
+        punchLayout = view.findViewById(R.id.mine_punch);
+        punch = view.findViewById(R.id.punch_next);
+        punchLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), PunchActivity.class);
+            startActivity(intent);
+        });
+        punch.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), PunchActivity.class);
+            startActivity(intent);
+        });
     }
 
 

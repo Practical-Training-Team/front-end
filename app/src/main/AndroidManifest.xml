@@ -36,6 +36,7 @@
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.CreditActivity"/>
         <activity android:name=".view.SearchResultActivity"/>
+        <activity android:name=".view.PunchActivity"/>
     </application>
 
 </manifest>

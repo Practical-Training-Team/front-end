@@ -45,7 +45,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/punch1" />
+        app:srcCompat="@mipmap/text1" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -54,7 +54,7 @@
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:srcCompat="@mipmap/punch2" />
+        app:srcCompat="@mipmap/text2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
