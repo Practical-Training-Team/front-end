@@ -78,9 +78,12 @@ public class CreditActivity extends AppCompatActivity {
                     if (credit.getApril() == 0) april.setBackgroundResource(R.mipmap.april_grey);
                     if (credit.getMay() == 0) may.setBackgroundResource(R.mipmap.may_grey);
                     if (credit.getJune() == 0) june.setBackgroundResource(R.mipmap.june_grey);
-                    if (credit.getJuly() == 0) july.setBackgroundResource(R.mipmap.july);
-                    if (credit.getAugust() == 0) august.setBackgroundResource(R.mipmap.august_grey);
-                    if (credit.getSeptember() == 0) september.setBackgroundResource(R.mipmap.september_grey);
+                    //if (credit.getJuly() == 0)
+                        july.setBackgroundResource(R.mipmap.july);
+                    //if (credit.getAugust() == 0)
+                        august.setBackgroundResource(R.mipmap.august_grey);
+                    //if (credit.getSeptember() == 0)
+                        september.setBackgroundResource(R.mipmap.september_grey);
                     if (credit.getOctober() == 0) october.setBackgroundResource(R.mipmap.october_grey);
                     if (credit.getNovember() == 0) november.setBackgroundResource(R.mipmap.november_grey);
                     if (credit.getDecember() == 0) december.setBackgroundResource(R.mipmap.december_grey);

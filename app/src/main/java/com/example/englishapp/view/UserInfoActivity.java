@@ -105,23 +105,27 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     private void initPic() {
+        Uri uri1 = Uri.parse("http://10.135.116.43:8080/images/5_pie.png");
+        Uri uri2 = Uri.parse("http://10.135.116.43:8080/images/5_line.png");
+        Glide.with(UserInfoActivity.this).load(uri1).into(pic1);
+        Glide.with(UserInfoActivity.this).load(uri2).into(pic2);
         SharedPreferences preferences = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         int id =  preferences.getInt(KEY_INT_VALUE, 0);
-        NetUtil.getInstance().getApi().getPic(id).enqueue(new Callback<MyPicture>() {
-            @Override
-            public void onResponse(Call<MyPicture> call, Response<MyPicture> response) {
-                if (response.body() != null) {
-                    Uri uri1 = Uri.parse(response.body().getUrl_pie());
-                    Uri uri2 = Uri.parse(response.body().getUrl_line());
-                    Glide.with(UserInfoActivity.this).load(uri1).into(pic1);
-                    Glide.with(UserInfoActivity.this).load(uri2).into(pic2);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MyPicture> call, Throwable t) {
-
-            }
-        });
+//        NetUtil.getInstance().getApi().getPic(id).enqueue(new Callback<MyPicture>() {
+//            @Override
+//            public void onResponse(Call<MyPicture> call, Response<MyPicture> response) {
+//                if (response.body() != null) {
+//                    Uri uri1 = Uri.parse(response.body().getUrl_pie());
+//                    Uri uri2 = Uri.parse(response.body().getUrl_line());
+//                    Glide.with(UserInfoActivity.this).load(uri1).into(pic1);
+//                    Glide.with(UserInfoActivity.this).load(uri2).into(pic2);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MyPicture> call, Throwable t) {
+//
+//            }
+//        });
     }
 }

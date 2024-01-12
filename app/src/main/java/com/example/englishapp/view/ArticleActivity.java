@@ -83,20 +83,21 @@ public class ArticleActivity extends AppCompatActivity {
 
     private void successful() {
         Toast.makeText(this, "点赞成功！" , Toast.LENGTH_SHORT).show();
-        thumbNum.setText("点赞数: "+articlePage.getLikes()+1+"");
+        int num = articlePage.getLikes()+1;
+        thumbNum.setText("点赞数: "+num+"");
     }
 
     private void initData(int id, int cid) {
         SharedPreferences preferences = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         int uid =  preferences.getInt(KEY_INT_VALUE, 0);
-        NetUtil.getInstance().getApi().getContent().enqueue(new Callback<ArticlePage>() {
+        NetUtil.getInstance().getApi().getContent(id,cid,uid).enqueue(new Callback<ArticlePage>() {
             @Override
             public void onResponse(Call<ArticlePage> call, Response<ArticlePage> response) {
                 articlePage = response.body();
                 title.setText(articlePage.getTitle());
                 thumbNum.setText("点赞数: "+articlePage.getLikes());
                 readNum.setText("阅读数： "+articlePage.getPage_view());
-                time.setText("发布时间："+ articlePage.getRelease_time().substring(0,9) + articlePage.getRelease_time().substring(11,18));
+                time.setText("发布时间："+ articlePage.getRelease_time().substring(0,10) + articlePage.getRelease_time().substring(11,1));
                 recyclerView.setAdapter(new ContentAdapter(response.body().getContent(), ArticleActivity.this, articlePage.getArticle_id()));
                 Uri uri = Uri.parse(response.body().getImage());
                 Glide.with(ArticleActivity.this).load(uri).into(picture);

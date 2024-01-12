@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,19 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         holder.num.setText(list.get(position).getRank()+"");
         holder.score.setText(list.get(position).getScore()+"");
         holder.name.setText(list.get(position).getName());
+        if(position == 0) {
+            holder.image.setBackgroundResource(R.mipmap.avatar);
+        } else if (position == 1) {
+            holder.image.setBackgroundResource(R.mipmap.avatar1);
+        }else if (position == 2) {
+            holder.image.setBackgroundResource(R.mipmap.avatar2);
+        }else if (position == 3) {
+            holder.image.setBackgroundResource(R.mipmap.avatar3);
+        }else if (position == 4) {
+            holder.image.setBackgroundResource(R.mipmap.avatar4);
+        }else if (position == 5) {
+            holder.image.setBackgroundResource(R.mipmap.avatar5);
+        }
     }
 
     @Override
@@ -44,11 +58,13 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView num, score, name;
+        private ImageView image;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             num = itemView.findViewById(R.id.rank);
             score = itemView.findViewById(R.id.rank_score);
             name = itemView.findViewById(R.id.rank_name);
+            image = itemView.findViewById(R.id.rank_avatar);
         }
     }
 }

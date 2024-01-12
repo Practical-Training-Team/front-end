@@ -40,9 +40,8 @@ public interface RetrofitAPI {
     @GET("signupsignin/signin/")
     Call<Integer> login(@Query("login_account")String login_account, @Query("login_password") String pwd);
 
-    @GET("articles/singlearticle/?article_id=3&category_id=0&user_id=1")
-    Call<ArticlePage> getContent();
-            //(@Query("article_id") int id, @Query("category_id") int cid, @Query("user_id") int uid);
+    @GET("articles/singlearticle/")
+    Call<ArticlePage> getContent(@Query("article_id") int id, @Query("category_id") int cid, @Query("user_id") int uid);
 
     @GET("signupsignin/signup/")
     Call<Integer> register(@Query("password") String password, @Query("account") String account);
