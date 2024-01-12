@@ -1,76 +1,84 @@
-package com.example.englishapp;
+package com.example.englishapp.controller;
 
-import android.Manifest;
+import static com.example.englishapp.view.LoginActivity.KEY_INT_VALUE;
+import static com.example.englishapp.view.SearchActivity.PREF_NAME;
+
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.util.Log;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.englishapp.NetUtil;
+import com.example.englishapp.R;
+import com.example.englishapp.databean.ArticlePage;
 import com.example.englishapp.databean.Result;
-import com.example.englishapp.databean.Sentence;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHolder> {
-    private List<Sentence> list;
-    private List<Boolean> isRecordingList = new ArrayList<>();
-    private static final String TAG = "testv vvv test test";
+public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
+    private List<ArticlePage.ContentDTO> list;
+    private int articleId;
     private Activity activity;
-
+    private List<Boolean> isRecordingList = new ArrayList<>();
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
+    private String base64String = "";
+    private Result result;
 
-    public PassageAdapter(List<Sentence> list_test, Activity activity) {
-        this.list = list_test;
-        for (int i = 0; i < list_test.size(); i++) {
+    public ContentAdapter(List<ArticlePage.ContentDTO> list, Activity activity, int id) {
+        this.list = list;
+        for (int i = 0; i < list.size(); i++) {
             isRecordingList.add(false);
         }
         this.activity = activity;
+        this.articleId = id;
     }
-
 
     @NonNull
     @Override
-    public PassageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_practice, parent, false);
-        return new PassageAdapter.ViewHolder(view);
+    public ContentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_page,parent,false);
+        return new ContentAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PassageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ContentAdapter.ViewHolder holder, int position) {
         holder.Read.setOnClickListener(v -> {
             String path = activity.getFilesDir() + "/sample";
             boolean isRecording = isRecordingList.get(position);
+            int pid = list.get(position).getParagraph_id();
             if (isRecording) {
-                holder.Read.setBackgroundResource(R.mipmap.mic2);
-                stopRecording(path);
+                holder.Read.setBackgroundResource(R.mipmap.stop);
+                stopRecording(path,pid);
             } else {
                 try {
-                    holder.Read.setBackgroundResource(R.mipmap.stop);
+                    holder.Read.setBackgroundResource(R.mipmap.mic2);
                     startRecording(path);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -79,10 +87,9 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
             isRecordingList.set(position, !isRecording);
             notifyItemChanged(position);
         });
-        holder.Play.setOnClickListener(v -> playMp3(list.get(position).getUrl()));
-        holder.Content.setText(list.get(position).getContent().toString());
-        holder.Number.setText(String.valueOf(position + 1));
-        holder.Result.setOnClickListener(v -> showResult());
+        holder.Play.setOnClickListener(v -> playMp3(list.get(position).getAudio()));
+        holder.Content.setText(list.get(position).getText().toString());
+        holder.Result.setOnClickListener(v -> showResult(Uri.parse(result.getUrl())));
     }
 
     @Override
@@ -90,17 +97,15 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
         return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView Content, Number;
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView Play, Read, Result;
-
+        private TextView Content;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Number = itemView.findViewById(R.id.number_tv);
-            Content = itemView.findViewById(R.id.content_tv);
-            Play = itemView.findViewById(R.id.play);
-            Read = itemView.findViewById(R.id.read);
-            Result = itemView.findViewById(R.id.result);
+            Play = itemView.findViewById(R.id.page_play);
+            Read = itemView.findViewById(R.id.page_mic);
+            Result = itemView.findViewById(R.id.page_res);
+            Content = itemView.findViewById(R.id.page_tv);
         }
     }
 
@@ -167,7 +172,7 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
 
     }
 
-    private void stopRecording(String path) {
+    private void stopRecording(String path, int id) {
         if (mediaRecorder != null) {
             try {
                 mediaRecorder.stop();//停止录音
@@ -178,31 +183,68 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
                 mediaRecorder.release();//释放资源
                 mediaRecorder = null;
             }
-            Log.d(TAG, "stopRecording: 1233456");
         }
-        uploadAudio(new File(path + "Sample.mp3"));
+        uploadAudio(new File(path + "Sample.mp3"), id);
     }
 
-    private void uploadAudio(File audioFile) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("audio/*"), audioFile);
-        MultipartBody.Part audioPart = MultipartBody.Part.createFormData("audio", audioFile.getName(), requestBody);
-        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "Audio description");
+    private void uploadAudio(File audioFile, int pid) {
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("audio/*"), audioFile);
+//        MultipartBody.Part audioPart = MultipartBody.Part.createFormData("audio", audioFile.getName(), requestBody);
+//        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "Audio description");
 
-        NetUtil.getInstance().getApi().uploadFile(1, description, audioPart).enqueue(new Callback<ResponseBody>() {
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            base64String = convertMP3ToBase64String(String.valueOf(audioFile));
+        }
+        SharedPreferences preferences = activity.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        int id =  preferences.getInt(KEY_INT_VALUE, 0);
+
+        NetUtil.getInstance().getApi().getPageResult(id, articleId,pid, base64String).enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                if (response.body() != null) {
+                    result = response.body();
+                    System.out.println(response.body().toString());
+                    successful();
+                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Result> call, Throwable t) {
 
             }
         });
     }
 
-    private void showResult() {
-        final Result[] result = {new Result()};
+    private void successful() {
+        Toast.makeText(activity, "上传成功！", Toast.LENGTH_SHORT).show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String convertMP3ToBase64String(String filePath) {
+        try {
+            File mp3File = new File(filePath);
+            FileInputStream fileInputStream = new FileInputStream(mp3File);
+
+            byte[] data = new byte[(int) mp3File.length()];
+            fileInputStream.read(data);
+            fileInputStream.close();
+
+            // 使用Base64进行编码
+            byte[] base64Encoded = Base64.getEncoder().encode(data);
+
+            // 将编码后的数据转换为字符串
+            String base64String = new String(base64Encoded);
+
+            return base64String;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void showResult(Uri uri) {
+      //  final Result[] result = {new Result()};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         AlertDialog dialog = builder.create();
@@ -216,18 +258,6 @@ public class PassageAdapter extends RecyclerView.Adapter<PassageAdapter.ViewHold
         Window window = dialog.getWindow();
         window.setContentView(R.layout.popwindow_result);
         ImageView res = window.findViewById(R.id.score);
-
-        NetUtil.getInstance().getApi().getResult().enqueue(new Callback<Result>() {
-            @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                result[0] = response.body();
-                Glide.with(activity).load(result[0].getUrl()).into(res);
-            }
-
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-
-            }
-        });
+        Glide.with(activity).load(uri).into(res);
     }
 }

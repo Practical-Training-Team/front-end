@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.englishapp.PracticeAdapter;
+import com.example.englishapp.controller.PracticeAdapter;
 import com.example.englishapp.R;
 import com.example.englishapp.databean.Type;
 

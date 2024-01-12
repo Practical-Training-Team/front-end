@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/page_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_grey_double"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:text="123456789s4"
+        android:layout_marginStart="10dp"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/page_res"
+        app:layout_constraintEnd_toStartOf="@+id/page_mic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/page_play" />
+
+    <ImageView
+        android:id="@+id/page_play"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/play"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/page_mic"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/mic2"
+        app:layout_constraintEnd_toEndOf="@id/page_play"
+        app:layout_constraintTop_toBottomOf="@+id/page_play" />
+
+    <ImageView
+        android:id="@+id/page_res"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@mipmap/result"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/page_play"
+        app:layout_constraintTop_toBottomOf="@+id/page_mic" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

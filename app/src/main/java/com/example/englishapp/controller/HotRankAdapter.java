@@ -1,4 +1,4 @@
-package com.example.englishapp;
+package com.example.englishapp.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,9 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.englishapp.databean.AdviceItem;
+import com.example.englishapp.R;
 import com.example.englishapp.databean.Article;
-import com.example.englishapp.databean.ArticlePage;
 import com.example.englishapp.view.ArticleActivity;
 
 import java.util.List;

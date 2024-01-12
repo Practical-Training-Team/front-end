@@ -37,6 +37,8 @@
         <activity android:name=".view.CreditActivity"/>
         <activity android:name=".view.SearchResultActivity"/>
         <activity android:name=".view.PunchActivity"/>
+        <activity android:name=".view.RankActivity"/>
+        <activity android:name=".view.UserInfoActivity"/>
     </application>
 
 </manifest>

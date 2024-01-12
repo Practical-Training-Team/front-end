@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.englishapp.AdviceAdapter;
+import com.example.englishapp.controller.AdviceAdapter;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
 import com.example.englishapp.databean.Article;

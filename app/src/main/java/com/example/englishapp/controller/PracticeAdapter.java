@@ -1,4 +1,4 @@
-package com.example.englishapp;
+package com.example.englishapp.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.englishapp.R;
 import com.example.englishapp.databean.Type;
 import com.example.englishapp.view.PassageActivity;
 

@@ -1,4 +1,4 @@
-package com.example.englishapp;
+package com.example.englishapp.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.englishapp.R;
 import com.example.englishapp.databean.Article;
 import com.example.englishapp.view.ArticleActivity;
 
@@ -54,6 +55,7 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.ViewHolder
         holder.layout.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ArticleActivity.class);
             intent.putExtra("article_id", list.get(position).getArticle_id());
+            intent.putExtra("category_id", Integer.parseInt(list.get(position).getCategory()));
             Log.d("articleid" , list.get(position).getArticle_id() + "\\");
             activity.startActivity(intent);
         });

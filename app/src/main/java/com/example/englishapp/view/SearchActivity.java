@@ -11,20 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.englishapp.HistoryAdapter;
-import com.example.englishapp.HotRankAdapter;
+import com.example.englishapp.controller.HistoryAdapter;
+import com.example.englishapp.controller.HotRankAdapter;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
-import com.example.englishapp.databean.AdviceItem;
 import com.example.englishapp.databean.Article;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

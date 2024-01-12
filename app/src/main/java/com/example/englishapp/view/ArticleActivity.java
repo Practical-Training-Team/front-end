@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.englishapp.databean.Article;
+import com.example.englishapp.controller.ContentAdapter;
 import com.example.englishapp.databean.ArticlePage;
 import com.example.englishapp.NetUtil;
 import com.example.englishapp.R;
@@ -27,21 +29,24 @@ public class ArticleActivity extends AppCompatActivity {
 
     private TextView title, content, thumbNum, readNum, time;
     private ImageView thumb, back, picture;
-    Article articlePage;
+    ArticlePage articlePage;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_text_page);
         int id = getIntent().getIntExtra("article_id", -1);
+        int cid = getIntent().getIntExtra("category_id", -1);
         initView(id);
-        initData(id);
+        initData(id,cid);
     }
 
     private void initView(int id) {
         title = findViewById(R.id.article_title1);
         picture = findViewById(R.id.article_im);
-        content = findViewById(R.id.article_content);
+        recyclerView = findViewById(R.id.article_content);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         thumbNum = findViewById(R.id.article_thumb_num);
         thumb = findViewById(R.id.article_thumb);
         thumb.setOnClickListener(v -> addThumb(id));
@@ -49,6 +54,7 @@ public class ArticleActivity extends AppCompatActivity {
         time = findViewById(R.id.time);
         back = findViewById(R.id.article_back);
         back.setOnClickListener( v -> finish());
+
     }
 
     private void addThumb(int id) {
@@ -77,25 +83,27 @@ public class ArticleActivity extends AppCompatActivity {
 
     private void successful() {
         Toast.makeText(this, "点赞成功！" , Toast.LENGTH_SHORT).show();
-        thumbNum.setText("点赞数: "+articlePage.getLikes()+"1");
+        thumbNum.setText("点赞数: "+articlePage.getLikes()+1+"");
     }
 
-    private void initData(int id) {
-        NetUtil.getInstance().getApi().getContent(id).enqueue(new Callback<Article>() {
+    private void initData(int id, int cid) {
+        SharedPreferences preferences = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        int uid =  preferences.getInt(KEY_INT_VALUE, 0);
+        NetUtil.getInstance().getApi().getContent().enqueue(new Callback<ArticlePage>() {
             @Override
-            public void onResponse(Call<Article> call, Response<Article> response) {
+            public void onResponse(Call<ArticlePage> call, Response<ArticlePage> response) {
                 articlePage = response.body();
                 title.setText(articlePage.getTitle());
-                content.setText(articlePage.getContent());
                 thumbNum.setText("点赞数: "+articlePage.getLikes());
                 readNum.setText("阅读数： "+articlePage.getPage_view());
                 time.setText("发布时间："+ articlePage.getRelease_time().substring(0,9) + articlePage.getRelease_time().substring(11,18));
+                recyclerView.setAdapter(new ContentAdapter(response.body().getContent(), ArticleActivity.this, articlePage.getArticle_id()));
                 Uri uri = Uri.parse(response.body().getImage());
                 Glide.with(ArticleActivity.this).load(uri).into(picture);
             }
 
             @Override
-            public void onFailure(Call<Article> call, Throwable t) {
+            public void onFailure(Call<ArticlePage> call, Throwable t) {
 
             }
         });

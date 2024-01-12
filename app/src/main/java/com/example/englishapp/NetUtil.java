@@ -22,7 +22,7 @@ public class NetUtil {
                 .setLevel(HttpLoggingInterceptor.Level.BODY);
         client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .connectTimeout(60000, TimeUnit.MILLISECONDS)
+                .connectTimeout(20000, TimeUnit.MILLISECONDS)
                 .build();
 
         api = new Retrofit.Builder()
